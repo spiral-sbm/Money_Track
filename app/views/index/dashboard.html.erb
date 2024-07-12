@@ -9,7 +9,49 @@
           <p class="text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-2xl text-white">Bem-vindo, <%= current_user.first_name %>!</p>
         </div>
 
-        <div class="relative overflow-x-auto bg-gray-800 row-span-2 rounded">02</div>
+        <div class="relative overflow-x-auto bg-gray-800 row-span-2 rounded">
+          <h2 class="text-2xl font-extrabold dark:text-white text-center py-2">Suas Categorias</h2>
+          <div class="relative overflow-x-auto">
+          <% if current_user.categories.any? %>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nome
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Ações
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% current_user.categories.each do |category| %>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <%= category.name %>
+                        </th>
+                        <td class="px-6 py-4 flex justify-around">
+                            <%= link_to edit_category_path(category) do %>
+                              <span class="material-symbols-outlined hover:text-sky-500">edit</span>
+                            <% end %>
+                            <%= link_to category, data: { turbo_method: :delete, turbo_confirm: "Você tem certeza?" } do %>
+                              <span class="material-symbols-outlined hover:text-red-500">delete</span>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+          <% else %>
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <span class="font-medium">Atenção</span> Você não tem uma categoria cadastrada.
+            </div>
+          <% end %>
+        </div>
+          <div class="m-5">
+          <%= link_to 'Nova Categoria', new_category_path, class:"text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-3 text-center" %>
+          </div>
+        </div>
 
         <div class="bg-gray-800 rounded flex flex-col justify-around">
           <p class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">Nome: <%= current_user.first_name %></p>
