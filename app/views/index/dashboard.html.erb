@@ -1,26 +1,68 @@
-<header class="bg-[#101015]">
-  <menu class="flex pt-2 justify-around">
+<section class="bg-[#101015] text-white px-3 min-h-screen">
+  <menu class="flex pt-2 justify-between items-center">
     <h1 class="text-white" >MoneyTrack</h1>
     <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Você tem certeza?" }, class:"text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-800 shadow-lg shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"  %>
   </menu>
-</header>
-<section class="bg-[#101015] text-white px-3 min-h-screen">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 min-h-screen">
-      <div class="grid grid-cols-2 gap-3">
-        <div class="bg-[#456cad] rounded text-center">
-          <p>Bem-vindo, <%= current_user.first_name %>!</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div class="grid grid-cols-2 gap-3 min-h-screen">
+        <div class="bg-[#456cad] rounded text-center flex justify-center items-center shadow-lg shadow-[#456cad]/50">
+          <p class="text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-2xl text-white">Bem-vindo, <%= current_user.first_name %>!</p>
         </div>
 
-        <div class="bg-gray-800 row-span-2 rounded">02</div>
+        <div class="relative overflow-x-auto bg-gray-800 row-span-2 rounded">02</div>
 
-        <div class="bg-gray-800 rounded">03</div>
+        <div class="bg-gray-800 rounded flex flex-col justify-around">
+          <p class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">Nome: <%= current_user.first_name %></p>
+          <p class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">Sobrenome: <%= current_user.last_name %></p>
+          <%= link_to edit_user_registration_path, class:"text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-center" do %>
+          <span class="material-symbols-outlined">settings</span>
+          <% end %>
+        </div>
 
         <div class="bg-gray-800 row-span-4 rounded">04</div>
 
-        <div class="bg-[#456cad] row-span-4 rounded">05</div>
+        <div class="bg-[#456cad] row-span-4 rounded shadow-lg shadow-[#456cad]/50">05</div>
       </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div class="bg-gray-800 col-span-2 row-span-2 rounded">06</div>
+      <div class="grid grid-cols-2 gap-3 min-h-screen">
+        <div class="bg-gray-800 col-span-2 row-span-2 rounded">
+          <h2 class="text-2xl font-extrabold dark:text-white text-center py-2">Suas contas bancárias</h2>
+
+          <% if current_user.bank_accounts.any? %>
+            <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" class="px-6 py-3">Banco</th>
+                  <th scope="col" class="px-6 py-3">Tipo</th>
+                  <th scope="col" class="px-6 py-3">Dinheiro</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% current_user.bank_accounts.each do |bank_account| %>
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td class="px-6 py-4"><%= bank_account.bank_name %></td>
+                    <td class="px-6 py-4"><%= bank_account.account_type %></td>
+                    <td class="px-6 py-4"><%= number_to_currency(bank_account.balance) %></td>
+                    <td class="px-6 py-4 text-right">
+                    <%= link_to edit_bank_account_path(bank_account) do %>
+                    <span class="material-symbols-outlined hover:text-sky-500">edit</span>
+                    <% end %>
+                    <%= link_to bank_account, data: { turbo_method: :delete, turbo_confirm: "Você tem certeza?" } do %>
+                      <span class="material-symbols-outlined hover:text-red-500">delete</span>
+                    <% end %>
+                </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <span class="font-medium">Atenção</span> Você não tem uma conta bancária cadastrada.
+            </div>
+          <% end %>
+          <div class="md:p-5 px-2 py-5">
+          <%= link_to 'Adicionar nova conta bancária', new_bank_account_path, class:"text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-3 text-center" %>
+          </div>
+        </div>
         <div class="bg-gray-800 row-span-2 rounded">07</div>
         <div class="bg-gray-800 row-span-2 rounded">08</div>
         <div class="bg-[#F2F0E4] col-span-2 rounded text-black">09</div>

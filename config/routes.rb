@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   unauthenticated do
     root to: 'index#welcome', as: :unauthenticated_root
   end
+
+  resources :bank_accounts, except: [:index, :show]
 end
