@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   resources :categories, except: [:index, :show]
   resources :bank_accounts, except: [:index, :show]
+  resources :transactions, except: [:show]
 end

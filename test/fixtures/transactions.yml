@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 9.99
+  description: MyString
+  date: 2024-07-12
+  category: one
+  bank_account: one
+  user: one
+
+two:
+  amount: 9.99
+  description: MyString
+  date: 2024-07-12
+  category: two
+  bank_account: two
+  user: two

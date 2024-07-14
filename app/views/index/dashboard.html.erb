@@ -63,7 +63,31 @@
 
         <div class="bg-gray-800 row-span-4 rounded">04</div>
 
-        <div class="bg-[#456cad] row-span-4 rounded shadow-lg shadow-[#456cad]/50">05</div>
+        <div class="bg-[#456cad] row-span-4 rounded shadow-lg shadow-[#456cad]/50 flex flex-col items-center justify-evenly">
+          <h2 class="text-2xl font-extrabold dark:text-white text-center py-2">Suas Transferências</h2>
+          <% if current_user.transactions.any? %>
+          <div class="w-4/5 font-mono text-sm font-medium overflow-y-auto h-60 text-gray-900 border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              <% current_user.transactions.each do |transaction| %>
+              <button type="button" class="w-full px-4 py-2 font-medium text-left rtl:text-right border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+                  <% if transaction.amount >= 0 %>
+                  <p class="text-green-500"><strong>Quantia:</strong> <%= number_to_currency(transaction.amount) %></p>
+                  <% else %>
+                  <p class="text-red-500"><strong>Quantia:</strong> <%= number_to_currency(transaction.amount) %></p>
+                  <% end %>
+                  <p><strong>Data:</strong> <%= transaction.date.strftime("%d de %B de %Y") %></p>
+                  <p><strong>Categoria:</strong> <%= transaction.category.name %></p>
+                  <p><strong>Banco:</strong> <%= transaction.bank_account.bank_name %></p>
+              </button>
+              <% end %>
+          </div>
+          <a href="/transactions" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Veja Mais</a>
+          <% else %>
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <span class="font-medium">Atenção</span> Você não tem uma transferências cadastradas.
+            </div>
+          <% end %>
+          <%= link_to 'Nova Transferência', new_transaction_path, class:"text-white bg-gradient-to-r mt-5 from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-3 text-center" %>
+        </div>
       </div>
       <div class="grid grid-cols-2 gap-3 min-h-screen">
         <div class="bg-gray-800 col-span-2 row-span-2 rounded">
@@ -105,8 +129,11 @@
           <%= link_to 'Adicionar nova conta bancária', new_bank_account_path, class:"text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-3 text-center" %>
           </div>
         </div>
+
         <div class="bg-gray-800 row-span-2 rounded">07</div>
+
         <div class="bg-gray-800 row-span-2 rounded">08</div>
+
         <div class="bg-[#F2F0E4] col-span-2 rounded text-black">09</div>
       </div>
   </div>
