@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  target_amount: 9.99
+  current_amount: 9.99
+  end_date: 2024-07-13
+  user: one
+
+two:
+  name: MyString
+  target_amount: 9.99
+  current_amount: 9.99
+  end_date: 2024-07-13
+  user: two

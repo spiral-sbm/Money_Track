@@ -35,7 +35,7 @@ class TransactionsController < ApplicationController
   
     def destroy
       @transaction.destroy
-      redirect_to authenticated_root_path, notice: 'Transaction was successfully destroyed.'
+      redirect_to transactions_path, notice: 'Transaction was successfully destroyed.'
     end
   
     private
