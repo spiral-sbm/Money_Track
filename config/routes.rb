@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :bank_accounts, except: [:index, :show]
   resources :transactions, except: [:show]
   resources :savings_goals, except: [:show]
+  resources :budgets, except: [:index, :show]
 end

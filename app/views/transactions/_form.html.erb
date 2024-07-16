@@ -24,15 +24,12 @@
 
   <div class="mb-5">
     <%= form.label :date, 'Data', class: "block text-white text-sm font-bold mb-2" %>
-    <%= form.date_select :date, 
-          order: [:day, :month, :year], 
-          prompt: { day: 'Dia', month: 'Mês', year: 'Ano' },
-          class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    <%= form.date_select :date, :order => [:day, :month, :year], class: "p-10" %>
   </div>
 
   <div class="mb-5">
     <%= form.label :category, class: "block text-white text-sm font-bold mb-2" %>
-    <%= form.collection_select :category_id, current_user.categories, :id, :name, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    <%= form.collection_select :category_id, current_user.categories, :id, :name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
   </div>
 
   <div class="mb-5">
