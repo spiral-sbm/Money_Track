@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     root to: 'index#welcome', as: :unauthenticated_root
   end
 
-  resources :categories, except: [:index, :show]
-  resources :bank_accounts, except: [:index, :show]
-  resources :transactions, except: [:show]
-  resources :savings_goals, except: [:show]
-  resources :budgets, except: [:index, :show]
+  resources :categories
+  resources :bank_accounts
+  resources :transactions
+  resources :savings_goals
+  resources :budgets
 end
