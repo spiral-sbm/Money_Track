@@ -1,24 +1,48 @@
-# README
+# Money Track
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Money Track é uma aplicação web para gerenciamento financeiro pessoal, desenvolvida utilizando Ruby on Rails 7.1 e estilizada com Tailwind CSS.
 
-Things you may want to cover:
+## Funcionalidades Principais
 
-* Ruby version
+- **Gestão de Transações:** Registre suas transações financeiras, categorizando-as para melhor organização.
+- **Orçamentos:** Defina orçamentos para controlar seus gastos e acompanhar seu progresso ao longo do tempo.
+- **Metas de Poupança:** Estabeleça metas de poupança para motivar seu crescimento financeiro.
+- **Dashboard Personalizado:** Visualize um resumo completo das suas finanças, incluindo saldo atual, últimas transações, orçamentos e metas de poupança.
 
-* System dependencies
+## Requisitos
 
-* Configuration
+- Ruby 3.3.4
+- Rails 7.1
+- PostgreSQL
 
-* Database creation
+## Configuração
 
-* Database initialization
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/spiral-sbm/Money_Track.git
+   cd money_track
+   ```
 
-* How to run the test suite
+2. **Instale as dependências:**
+   ```bash
+   bundle install
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. **Configure o banco de dados:**
+   - Crie o banco de dados e execute as migrações:
+     ```bash
+     rails db:create
+     rails db:migrate
+     ```
 
-* Deployment instructions
+4. **Inicie o servidor:**
+   ```bash
+   rails server
+   ```
 
-* ...
+5. **Acesse a aplicação:**
+   Abra seu navegador e vá para `http://localhost:3000`.
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir um issue para relatar bugs ou sugerir novas funcionalidades.
